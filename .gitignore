@@ -1,0 +1,51 @@
+# Flutter/Dart specific
+.dart_tool/
+.packages
+.pub/
+/build/
+.idea/
+.vscode/
+*.iml
+*.iws
+*.log
+*.jks
+*.keystore
+*.lock
+*.android/
+*.ios/
+*.linux/
+*.macos/
+*.web/
+*.windows/
+*.buildlog
+*.metadata
+flutter_*.png
+
+# Android specific
+**/local.properties
+**/.gradle/
+**/build/
+**/captures/
+**/gradle-wrapper.jar
+
+# iOS specific
+**/Pods/
+**/Podfile.lock
+**/Runner.xcworkspace/
+**/xcuserdata/
+**/DerivedData/
+**/.symlinks/
+
+# Visual Studio Code specific
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Android Studio specific
+*.iml
+/.idea
+/.idea/*
+!/.idea/misc.xml
+!/.idea/modules.xml

@@ -4,7 +4,6 @@ import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense_schema.dart';
 
-
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
   @override
@@ -15,34 +14,35 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
-    // Expense(
-    //   title: 'Groceries',
-    //   amount: 100.00,
-    //   date: DateTime.now(),
-    //   category: Category.food,
-    // ),
-    // Expense(
-    //   title: 'Gas',
-    //   amount: 50.00,
-    //   date: DateTime.now(),
-    //   category: Category.travel,
-    // ),
-    // Expense(
-    //   title: 'Lunch',
-    //   amount: 20.00,
-    //   date: DateTime.now(),
-    //   category: Category.food,
-    // ),
-    // Expense(
-    //   title: 'Dinner',
-    //   amount: 30.00,
-    //   date: DateTime.now(),
-    //   category: Category.food,
-    // ),
+    Expense(
+      title: 'Groceries',
+      amount: 100.00,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+    Expense(
+      title: 'Gas',
+      amount: 50.00,
+      date: DateTime.now(),
+      category: Category.travel,
+    ),
+    Expense(
+      title: 'Lunch',
+      amount: 20.00,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+    Expense(
+      title: 'Dinner',
+      amount: 30.00,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
   ];
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
@@ -69,7 +69,7 @@ class _ExpensesState extends State<Expenses> {
           label: 'Undo',
           onPressed: () {
             setState(() {
-              _registeredExpenses.insert(expenseIndex,expense);
+              _registeredExpenses.insert(expenseIndex, expense);
             });
           },
         ),
@@ -79,14 +79,18 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('No expenses added yet'),
     );
 
-    if(_registeredExpenses.isNotEmpty) {
-      mainContent = ExpensesList(expenses: _registeredExpenses , onRemoveExpense: _removeExpense,);
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
     }
-    
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -97,12 +101,23 @@ class _ExpensesState extends State<Expenses> {
         ],
         title: const Text('Expenses'),
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(child: mainContent),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(children: [
+              Expanded(
+                child: Chart(expenses: _registeredExpenses),
+              ),
+              Expanded(
+                child: mainContent,
+              ),
+            ]),
     );
   }
 }

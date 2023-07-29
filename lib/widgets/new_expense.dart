@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:expense_tracker/models/expense_Schema.dart';
+import 'package:expense_tracker/models/expense_schema.dart';
 
 final formatter = DateFormat.yMd();
 

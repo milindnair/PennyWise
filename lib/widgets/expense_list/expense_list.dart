@@ -1,6 +1,8 @@
-import 'package:expense_tracker/models/expense_Schema.dart';
+
 import 'package:expense_tracker/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
+import '../../models/expense_schema.dart';
+
 
 class ExpensesList extends StatelessWidget {
   const ExpensesList(
@@ -20,7 +22,7 @@ class ExpensesList extends StatelessWidget {
                 horizontal: Theme.of(context).cardTheme.margin!.horizontal),
           ),
           onDismissed: (direction) => {onRemoveExpense(expenses[index])},
-          child: ExpenseItem(expense: expenses[index]),
+          child: ExpenseItem(expenses[index]),
           ),
     );
   }
